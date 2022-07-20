@@ -50,6 +50,20 @@ print()
 
 # ========================================================================================================================================================= #
 
+def download_proxy(link, out):
+    proxies = open(out, 'wb')
+    r1 = requests.get(link)
+    proxies.write(r1.content)
+    length = []
+    length.append(r1.content)
+    length = length[0].splitlines()
+    length1 = len(length)
+    print(f"Completed! Successfully added {length1} proxies, Check the {out} file!")
+    time.sleep(1) # In seconds
+    sys.exit()
+
+# ========================================================================================================================================================= #
+
 option = int(input(f'''{Fore.LIGHTGREEN_EX}
 [+] Options [+]
 
@@ -60,43 +74,13 @@ option = int(input(f'''{Fore.LIGHTGREEN_EX}
 | Type >> '''))
 
 if option == 1:
-    out_file = "Https_Proxies.txt"
-    proxies = open(out_file, 'wb')
-    r1 = requests.get('https://api.openproxylist.xyz/http.txt')
-    proxies.write(r1.content)
-    length = []
-    length.append(r1.content)
-    length = length[0].splitlines()
-    length1 = len(length)
-    print(f"Completed! Successfully added {length1} proxies, Check the {out_file} file!")
-    time.sleep(1) # In seconds
-    sys.exit()
+    download_proxy('https://api.openproxylist.xyz/http.txt', 'Https_Proxies.txt')
 
 elif option == 2:
-    out_file = "Socks4_Proxies.txt"
-    proxies = open(out_file, 'wb')
-    r1 = requests.get('https://api.openproxylist.xyz/socks4.txt')
-    proxies.write(r1.content)
-    length = []
-    length.append(r1.content)
-    length = length[0].splitlines()
-    length1 = len(length)
-    print(f"Completed! Successfully added {length1} proxies, Check the {out_file} file!")
-    time.sleep(1) # In seconds
-    sys.exit()
+    download_proxy('https://api.openproxylist.xyz/socks4.txt', 'Socks4_Proxies.txt')
 
 elif option == 3:
-    out_file = "Socks5_Proxies.txt"
-    proxies = open(out_file, 'wb')
-    r1 = requests.get('https://api.openproxylist.xyz/socks4.txt')
-    proxies.write(r1.content)
-    length = []
-    length.append(r1.content)
-    length = length[0].splitlines()
-    length1 = len(length)
-    print(f"Completed! Successfully added {length1} proxies, Check the {out_file} file!")
-    time.sleep(1) # In seconds
-    sys.exit()
+    download_proxy('https://api.openproxylist.xyz/socks5.txt', 'Socks5_Proxies.txt')
 
 else:
     print("[-] Not a valid choice!")
