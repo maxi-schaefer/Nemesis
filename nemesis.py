@@ -1,12 +1,9 @@
 import os
-from signal import pause
 import sys
-import webbrowser
 import fade
 import time
 import requests
 from colorama import Fore
-import concurrent.futures
 
 test_url = 'https://www.youtube.com/channel/UCjqJ3HJkiyu12fzFKIGEovQ?sub_confirmation=1'
 
