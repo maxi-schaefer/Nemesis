@@ -5,8 +5,6 @@ import time
 import requests
 from colorama import Fore
 
-test_url = 'https://www.youtube.com/channel/UCjqJ3HJkiyu12fzFKIGEovQ?sub_confirmation=1'
-
 # Clear the console to get better view :)
 if os.name == "nt":        # Check if the system is windows
     os.system("cls")
@@ -32,18 +30,12 @@ info = """
 │ Developed by gokiimax               │
 │ !! For Educational Purposes Only !! │
 ╰─────────────────────────────────────╯
+
+    [1] Https       [3] Socks5
+    [2] Socks4      [4] Exit
 """
 faded_info = fade.greenblue(info)
 print(faded_info)
-
-# ========================================================================================================================================================= #
-
-text = f"{Fore.LIGHTGREEN_EX}[+] This program will scrape (Https,Socks4,Socks5) proxies into separate files"
-for x in text:
-  time.sleep(0.03) # In seconds
-  sys.stdout.write(x)
-  sys.stdout.flush()
-print()
 
 # ========================================================================================================================================================= #
 
@@ -55,29 +47,25 @@ def download_proxy(link, out):
     length.append(r1.content)
     length = length[0].splitlines()
     length1 = len(length)
-    print(f"Completed! Successfully added {length1} proxies, Check the {out} file!")
-    time.sleep(1) # In seconds
-    sys.exit()
+    print(f"{Fore.LIGHTGREEN_EX}[+] Completed! Successfully added {length1} proxies, Check the {out} file!")
+    return
 
 # ========================================================================================================================================================= #
 
-option = int(input(f'''{Fore.LIGHTGREEN_EX}
-[+] Options [+]
 
-[1] Https
-[2] Socks4
-[3] Socks5
+while True:
+    option = int(input(f"{Fore.LIGHTBLACK_EX}× {Fore.LIGHTCYAN_EX}Option {Fore.LIGHTBLACK_EX}» {Fore.RESET}"))
+    if option == 1:
+        download_proxy('https://api.openproxylist.xyz/http.txt', 'Https_Proxies.txt')
 
-| Type >> '''))
+    elif option == 2:
+        download_proxy('https://api.openproxylist.xyz/socks4.txt', 'Socks4_Proxies.txt')
 
-if option == 1:
-    download_proxy('https://api.openproxylist.xyz/http.txt', 'Https_Proxies.txt')
+    elif option == 3:
+        download_proxy('https://api.openproxylist.xyz/socks5.txt', 'Socks5_Proxies.txt')
 
-elif option == 2:
-    download_proxy('https://api.openproxylist.xyz/socks4.txt', 'Socks4_Proxies.txt')
+    elif option == 4:
+        sys.exit(-1)
 
-elif option == 3:
-    download_proxy('https://api.openproxylist.xyz/socks5.txt', 'Socks5_Proxies.txt')
-
-else:
-    print("[-] Not a valid choice!")
+    else:
+        print("[-] Not a valid choice!")
