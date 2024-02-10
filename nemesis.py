@@ -39,15 +39,14 @@ print(faded_info)
 
 # ========================================================================================================================================================= #
 
-def download_proxy(link, out):
-    proxies = open(out, 'wb')
+def download_proxy(link, out, type):
+    proxies = open(out, 'w')
     r1 = requests.get(link)
-    proxies.write(r1.content)
-    length = []
-    length.append(r1.content)
-    length = length[0].splitlines()
-    length1 = len(length)
-    print(f"{Fore.LIGHTGREEN_EX}[+] Completed! Successfully added {length1} proxies, Check the {out} file!")
+    lines = []
+    for line in r1.content.decode().split("\n"):
+        proxies.write(f"{type} {line.replace(':', ' ')}\n")
+        lines.append(line)
+    print(f"{Fore.LIGHTGREEN_EX}[+] Completed! Successfully added {len(lines)} proxies, Check the {out} file!")
     return
 
 # ========================================================================================================================================================= #
@@ -56,13 +55,13 @@ def download_proxy(link, out):
 while True:
     option = int(input(f"{Fore.LIGHTBLACK_EX}× {Fore.LIGHTCYAN_EX}Option {Fore.LIGHTBLACK_EX}» {Fore.RESET}"))
     if option == 1:
-        download_proxy('https://api.openproxylist.xyz/http.txt', 'Https_Proxies.txt')
+        download_proxy('https://api.openproxylist.xyz/http.txt', 'Https_Proxies.txt', "https")
 
     elif option == 2:
-        download_proxy('https://api.openproxylist.xyz/socks4.txt', 'Socks4_Proxies.txt')
+        download_proxy('https://api.openproxylist.xyz/socks4.txt', 'Socks4_Proxies.txt', "socks4")
 
     elif option == 3:
-        download_proxy('https://api.openproxylist.xyz/socks5.txt', 'Socks5_Proxies.txt')
+        download_proxy('https://api.openproxylist.xyz/socks5.txt', 'Socks5_Proxies.txt', "socks5")
 
     elif option == 4:
         sys.exit(-1)
